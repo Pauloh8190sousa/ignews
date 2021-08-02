@@ -40,11 +40,20 @@ export async function saveSubscription(
             )
         );
     }else {
-    /*    await fauna.query(
+        await fauna.query(
             q.Replace(
-                
+                q.Select(
+                    "ref",
+                    q.Get(
+                        q.Match(
+                            q.Index("subscription_by_id"),
+                            subscriptionId
+                        )
+                    )
+                ),
+                {data: subscriptionData}
             )
-        )*/
+        )
     }
 
 }
